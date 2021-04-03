@@ -31,7 +31,7 @@ const App = () => {
         } else if (value === 'A') {
           weight = 11;
         } else {
-          weight = value;
+          weight = parseInt(value);
         }
 
         if (suit === '♥' || suit === '♦') {
@@ -43,7 +43,7 @@ const App = () => {
         let card = {
           cardValue: value,
           cardSuit: suit,
-          cardWeight: parseInt(weight),
+          cardWeight: weight,
           cardColor: color,
         }
 
@@ -82,11 +82,20 @@ const App = () => {
     let tempHouseValue = 0;
 
     for (let card of playerCards) {
+      if (card.cardValue === 'A' && tempPlayerValue > 10) {
+        card.cardWeight = 1
+      }
+
       tempPlayerValue += card.cardWeight
     }
 
     for (let card of houseCards) {
+      if (card.cardValue === 'A' && tempHouseValue > 10) {
+        card.cardWeight = 1
+      }
+
       tempHouseValue += card.cardWeight
+
     }
 
     setPlayerValue(tempPlayerValue)
@@ -114,7 +123,7 @@ const App = () => {
       let tempDeck = deck;
       let tempHouseCards = houseCards;
       let tempHouseValue = houseValue;
-      let tempPlayerValue = playerValue;
+
 
       while(tempHouseValue <= 17) {
         let endDeck = tempDeck.pop();
