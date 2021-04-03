@@ -1,0 +1,27 @@
+body {
+  background-color: #339410;
+}
+
+#title-jack {
+  color: red;
+}
+
+.card-black, .card-red {
+  height: 150px;
+  width: 100px;
+  background-color: white;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-red {
+  color: red;
+}
+
+.cards {
+
+}
