@@ -79,24 +79,25 @@ const App = () => {
   }
 
   const calcTotal = () => {
+    let tempHouseCards = houseCards;
+    let tempPlayerCards = playerCards;
     let tempPlayerValue = 0;
     let tempHouseValue = 0;
 
-    for (let card of playerCards) {
+    for (let card of tempPlayerCards) {
       if (card.cardValue === 'A' && tempPlayerValue > 10) {
         card.cardWeight = 1
       }
 
       tempPlayerValue += card.cardWeight
+
     }
 
-    for (let card of houseCards) {
+    for (let card of tempHouseCards) {
       if (card.cardValue === 'A' && tempHouseValue > 10) {
         card.cardWeight = 1
       }
-
       tempHouseValue += card.cardWeight
-
     }
 
     setPlayerValue(tempPlayerValue)
@@ -128,6 +129,9 @@ const App = () => {
 
       while(tempHouseValue <= 17) {
         let endDeck = tempDeck.pop();
+        if (endDeck.cardValue === 'A' && tempHouseValue > 10) {
+          endDeck.cardWeight = 1;
+        }
         tempHouseValue += endDeck.cardWeight;
         tempHouseCards.push(endDeck);
       }
