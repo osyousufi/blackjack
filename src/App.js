@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import './styles.css';
 import Card from './components/Card';
 
-
 const App = () => {
 
   const [deck, setDeck] = useState([]);
@@ -108,8 +107,19 @@ const App = () => {
     if (!gameOver) {
       let tempDeck = deck;
       let tempPlayerCards = playerCards;
+      let tempPlayerValue = playerValue;
 
-      tempPlayerCards.push(tempDeck.pop());
+      let nextCard = tempDeck.pop()
+
+      for (let card of tempPlayerCards) {
+        if (card.cardValue === 'A') {
+          if (nextCard.cardWeight + tempPlayerValue > 21) {
+            card.cardWeight = 1
+          }
+        }
+      }
+
+      tempPlayerCards.push(nextCard);
 
       setDeck([...tempDeck])
       setPlayerCards([...tempPlayerCards])
@@ -193,7 +203,7 @@ const App = () => {
 
       <h1><span>Black</span><span id="title-jack">jack</span></h1>
       <div>
-        <button onClick={() => newGame()}>new game</button>
+        <button onClick={() => window.location.reload()}>new game</button>
         <button onClick={() => hit()}>hit</button>
         <button onClick={() => stand()}>stand</button>
       </div>
