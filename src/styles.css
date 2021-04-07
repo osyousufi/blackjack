@@ -1,14 +1,27 @@
 body {
-  background-color: #339410;
+  background-color: #8CF187;
 }
 
 #title-jack {
   color: red;
 }
 
+h1 {
+  font-size: 3rem;
+}
+
+.main {
+  text-align: center;
+  margin-top: 0;
+}
+
+.cards {
+  margin: 0 auto;
+}
+
 .card-black, .card-red {
-  height: 3rem;
-  width: 2rem;
+  height: 6rem;
+  width: 4rem;
   background-color: white;
   border-radius: 5px;
   display: flex;
@@ -18,8 +31,4 @@ body {
 
 .card-red {
   color: red;
-}
-
-.cards {
-
 }
