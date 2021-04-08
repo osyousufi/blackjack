@@ -204,9 +204,9 @@ const Game = () => {
     <div className="main">
       <h1><span>Black</span><span id="title-jack">jack</span></h1>
       <div>
-        <button onClick={() => window.location.reload()}>new game</button>
-        <button onClick={() => hit()}>hit</button>
-        <button onClick={() => stand()}>stand</button>
+        <button type="button" className="btn" onClick={() => window.location.reload()}>new game</button>
+        <button type="button" className="btn" onClick={() => hit()}>hit</button>
+        <button type="button" className="btn" onClick={() => stand()}>stand</button>
       </div>
 
 

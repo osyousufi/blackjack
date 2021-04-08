@@ -1,5 +1,6 @@
 body {
   background-color: #8CF187;
+  font-family: 'Chakra Petch', sans-serif;
 }
 
 #title-jack {
@@ -8,6 +9,22 @@ body {
 
 h1 {
   font-size: 3rem;
+}
+
+.btn {
+  -webkit-border-radius: 8;
+  -moz-border-radius: 8;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #141414;
+  padding: 10px 20px 10px 20px;
+  font-family: 'Chakra Petch', sans-serif;
+  margin: 0 5px;
+}
+
+.btn:hover {
+  background: #db1b1b;
+  text-decoration: none;
 }
 
 .main {
