@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import '../styles.css';
-import Card from './Card';
-
+import Table from './Table';
 
 
 const Game = () => {
@@ -68,7 +67,7 @@ const Game = () => {
           cardColor: color,
         }
 
-        tempDeck.push(card)
+        tempDeck.push(card);
       }
     }
 
@@ -89,74 +88,81 @@ const Game = () => {
 
     for (let card of cards) {
       if (card.cardValue === 'A' && value > 10) {
-        card.cardWeight = 1
+        card.cardWeight = 1;
       }
-
-      value += card.cardWeight
+      value += card.cardWeight;
     }
-    return value
+    return value;
+
   }
 
   const calcTotal = () => {
+
     let tempHouseCards = houseCards;
     let tempPlayerCards = playerCards;
     let tempPlayerValue = 0;
     let tempHouseValue = 0;
 
-    setPlayerValue(checkAce(tempPlayerCards, tempPlayerValue))
-    setHouseValue(checkAce(tempHouseCards, tempHouseValue))
+    setPlayerValue(checkAce(tempPlayerCards, tempPlayerValue));
+    setHouseValue(checkAce(tempHouseCards, tempHouseValue));
+
   }
 
   const hit = () => {
+
     if (!gameOver) {
       let tempDeck = deck;
       let tempPlayerCards = playerCards;
       let tempPlayerValue = playerValue;
 
-      let nextCard = tempDeck.pop()
+      let nextCard = tempDeck.pop();
+
 
       for (let card of tempPlayerCards) {
         if (card.cardValue === 'A') {
           if (nextCard.cardWeight + tempPlayerValue > 21) {
-            card.cardWeight = 1
+            card.cardWeight = 1;
           }
         }
       }
 
       tempPlayerCards.push(nextCard);
 
-      setDeck([...tempDeck])
-      setPlayerCards([...tempPlayerCards])
+      setDeck([...tempDeck]);
+      setPlayerCards([...tempPlayerCards]);
+
     } else {
-      return
+      return;
     }
 
   }
 
   const stand = () => {
+
     if (!gameOver) {
       let tempDeck = deck;
       let tempHouseCards = houseCards;
       let tempHouseValue = houseValue;
 
 
-      while(tempHouseValue <= 17) {
+      while (tempHouseValue <= 17) {
+
         let endDeck = tempDeck.pop();
         if (endDeck.cardValue === 'A' && tempHouseValue > 10) {
           endDeck.cardWeight = 1;
         }
+
         tempHouseValue += endDeck.cardWeight;
         tempHouseCards.push(endDeck);
+
       }
 
-
-
-      setDeck([...tempDeck])
-      setHouseCards([...tempHouseCards])
-      setHouseValue(tempHouseValue)
+      setDeck([...tempDeck]);
+      setHouseCards([...tempHouseCards]);
+      setHouseValue(tempHouseValue);
 
     } else {
-      return
+      return;
     }
 
   }
@@ -165,23 +171,23 @@ const Game = () => {
   const checkWin = () => {
 
     if (playerValue > 21) {
-      setGameCondition('Player bust, you lose!')
-      setGameOver(true)
+      setGameCondition('Player bust, you lose!');
+      setGameOver(true);
     } else if (houseValue > 21) {
-      setGameCondition('House bust, you win!')
-      setGameOver(true)
+      setGameCondition('House bust, you win!');
+      setGameOver(true);
     } else if (playerValue > houseValue && houseCards.length > 1) {
-      setGameCondition('You win!')
-      setGameOver(true)
+      setGameCondition('You win!');
+      setGameOver(true);
     } else if (houseValue > playerValue && houseCards.length > 1) {
-      setGameCondition('You lose!')
-      setGameOver(true)
+      setGameCondition('You lose!');
+      setGameOver(true);
     } else if (playerValue === houseValue && houseCards.length > 1) {
-      setGameCondition('Push!')
-      setGameOver(true)
+      setGameCondition('Push!');
+      setGameOver(true);
     } else {
-      setGameCondition('')
-      setGameOver(false)
+      setGameCondition('');
+      setGameOver(false);
     }
 
   }
@@ -210,34 +216,12 @@ const Game = () => {
 
 
       <p>{gameCondition}</p>
-      <p>your cards: ({playerValue.toString()})</p>
-      <table className="cards">
-        <tbody>
-          <tr>
-            {
-              playerCards.map((card, i) => {
-                return <Card key={i} value={card.cardValue} suit={card.cardSuit} color={card.cardColor} />
-              })
-            }
-          </tr>
-        </tbody>
-      </table>
 
-      <p>house cards: ({houseValue.toString()})</p>
-      <table className="cards">
-        <tbody>
-          <tr>
-            {
-              houseCards.map((card, i) => {
-                return <Card key={i} value={card.cardValue} suit={card.cardSuit} color={card.cardColor} />
-              })
-            }
-          </tr>
-        </tbody>
-      </table>
+      <Table tableName="Your" totalValue={playerValue.toString()} cards={playerCards} addDelay={false} />
+      <Table tableName="House" totalValue={houseValue.toString()} cards={houseCards} addDelay={true}  />
 
     </div>
-  )
+  );
 
 }
 
