@@ -1,1 +1,1 @@
-live: https://adoring-galileo-21eacc.netlify.app/
+live: https://osyblackjack.netlify.app/
